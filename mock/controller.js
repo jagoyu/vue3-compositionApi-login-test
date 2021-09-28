@@ -1,4 +1,4 @@
-import { user } from './user'
+import { user, menu } from './user'
 
 export function getToken(req) {
   const request = JSON.parse(req.body)
@@ -10,13 +10,15 @@ export function getToken(req) {
       message: '用户名或密码错误'
     }
   } else {
+    const findMenu = menu.find((item) => item.roleId === findUser.roleId)
     return {
       code: 0,
       message: '',
       data: {
         uid: 1,
         roleId: 0,
-        token: 'token'
+        token: 'token',
+        menuList: findMenu.menuList
       }
     }
   }

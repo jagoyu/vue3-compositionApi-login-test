@@ -23,26 +23,41 @@
 import { reactive } from 'vue'
 import { loginApi } from '@/api'
 import { ElMessage } from 'element-plus'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 const form = reactive({
   userName: '',
   password: ''
 })
 const router = useRouter()
-const route = useRoute()
+const store = useStore()
+
 async function onSubmit() {
   const { userName, password } = form
-  const { message, code } = await loginApi.login({
+  const { message, code, data } = await loginApi.login({
     userName,
     password
   })
   if (code === 0) {
     // 跳转不同界面 -- 暂时不设权限
-    console.log('route', route)
-    router.push('/workbench')
+    store.commit('setUser', data.roleId)
+    store.commit('setMenu', data.menuList)
+    let currentMenu = getCurrentMenu(data.menuList)
+    store.commit('setCurrentMenu', currentMenu)
+    let cPath = `/${currentMenu}`
+    router.push(cPath)
   } else {
     ElMessage.error(message)
+  }
+}
+function getCurrentMenu(path) {
+  for (let i = 0; i < path.length; i++) {
+    if (!path[i].children) {
+      return path[i].key
+    } else {
+      return getCurrentMenu(path[i].children)
+    }
   }
 }
 </script>
