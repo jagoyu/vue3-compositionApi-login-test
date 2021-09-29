@@ -1,4 +1,4 @@
-import { user, menu } from './user'
+import { user, menu } from './data'
 
 export function getToken(req) {
   const request = JSON.parse(req.body)
