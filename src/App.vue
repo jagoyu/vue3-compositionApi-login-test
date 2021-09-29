@@ -3,7 +3,6 @@
     <router-view />
   </div>
 </template>
-
 <style lang="scss">
 #nav {
   width: 100%;
