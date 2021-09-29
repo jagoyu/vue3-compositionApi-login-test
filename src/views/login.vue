@@ -41,7 +41,7 @@ async function onSubmit() {
   })
   if (code === 0) {
     // 跳转不同界面 -- 暂时不设权限
-    store.commit('setUser', data.roleId)
+    store.commit('setUser', data)
     store.commit('setMenu', data.menuList)
     let currentMenu = getCurrentMenu(data.menuList)
     store.commit('setCurrentMenu', currentMenu)

@@ -15,8 +15,9 @@ export function getToken(req) {
       code: 0,
       message: '',
       data: {
-        uid: 1,
-        roleId: 0,
+        uid: findUser.uid,
+        roleId: findUser.roleId,
+        userName: findUser.name,
         token: 'token',
         menuList: findMenu.menuList
       }

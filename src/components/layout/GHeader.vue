@@ -4,7 +4,7 @@
       <bicycle />
     </el-icon>
     <div class="right">
-      <span>欢迎您，jago</span>
+      <span>欢迎您，{{ userName }}</span>
       <el-button type="text" @click="logout">退出登录</el-button>
     </div>
   </div>
@@ -12,8 +12,13 @@
 <script setup>
 import { Bicycle } from '@element-plus/icons'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 const router = useRouter()
+const store = useStore()
+const userName = computed(() => store.state.userInfo.userName)
 function logout() {
+  store.commit('logout')
   router.push('/login')
 }
 </script>

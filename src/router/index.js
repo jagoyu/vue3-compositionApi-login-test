@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '../store'
 const routes = [
   {
     path: '/',
@@ -10,7 +11,13 @@ const routes = [
     component: () => import('@/views/login')
   },
   {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: () => import('@/views/404')
+  },
+  {
     path: '/',
+    name: 'index',
     component: () => import('@/components/layout'),
     children: [
       {
@@ -42,4 +49,16 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/login' && to.path !== '/') {
+    const token = store.state.userInfo.token
+    if (!token) {
+      next('/login')
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
 export default router
