@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/',
-    name: 'index',
+    name: 'laout',
     component: () => import('@/components/layout'),
     children: [
       {
