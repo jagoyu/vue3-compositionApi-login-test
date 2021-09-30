@@ -43,6 +43,7 @@ export function getMenu(request) {
   }
 }
 
+// 获取用户信息
 export function getUserInfo(request) {
   const req = JSON.parse(request.body)
   if (!req.token) {
