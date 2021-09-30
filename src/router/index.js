@@ -43,28 +43,25 @@ const routes = [
     ]
   }
 ]
-
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
 router.beforeEach((to, from, next) => {
-  const token = store.state.userInfo.token
-  if (to.path !== '/login' && to.path !== '/') {
-    if (!token) {
-      next('/login')
-    } else {
+  const token = store.state.token
+  if (!['/login', '/'].includes(to.path)) {
+    if (token) {
       next()
+    } else {
+      next('/login')
     }
   } else {
     if (token) {
-      next(store.state.currentMenu)
+      console.log(store.state.currentMenu)
+      next('/workbench')
     } else {
       next()
     }
   }
-})
-router.afterEach((route) => {
-  store.commit('setCurrentMenu', route.name)
 })
 export default router

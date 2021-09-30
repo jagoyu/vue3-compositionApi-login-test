@@ -10,25 +10,29 @@ export const user = [
     uid: 0,
     roleId: 0,
     name: 'jagoyu',
-    password: '111'
+    password: '111',
+    token: 'fjdkfjdfdhfgvyyegx'
   },
   {
     uid: 1,
     roleId: 0,
     name: 'admin',
-    password: '123'
+    password: '123',
+    token: 'kdfjjfuhug1fbbbgb'
   },
   {
     uid: 2,
     roleId: 1,
     name: 'zzz',
-    password: 'zzz'
+    password: 'zzz',
+    token: 'kdfjkdkfhh1lkpoojp1b'
   },
   {
     uid: 3,
     roleId: 1,
     name: 'jjj',
-    password: 'jjj'
+    password: 'jjj',
+    token: 'djffhh1jpdfhgujfjkdfjkjdfjkgdg1'
   }
 ]
 

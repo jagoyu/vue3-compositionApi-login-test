@@ -25,7 +25,6 @@ import { loginApi } from '@/api'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { getCurrentMenu } from '@/utils'
 import { LOG_IN } from '@/utils/constant'
 
 const form = reactive({
@@ -37,15 +36,12 @@ const store = useStore()
 
 async function onSubmit() {
   const { userName, password } = form
-  const { message, code, data } = await loginApi.login({
+  const { message, code, token } = await loginApi.login({
     userName,
     password
   })
   if (code === 0) {
-    const currentMenu = getCurrentMenu(data.menuList)
-    let cPath = `/${currentMenu}`
-    store.dispatch(LOG_IN, { ...data, currentMenu })
-    router.push(cPath)
+    store.dispatch(LOG_IN, token)
   } else {
     ElMessage.error(message)
   }
