@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { SET_CURRENT_MENU } from '../utils/constant'
 import store from '../store'
 const routes = [
   {
@@ -57,11 +58,13 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     if (token) {
-      next('/workbench')
+      next(store.state.currentMenu)
     } else {
       next()
     }
   }
 })
-router.afterEach(() => {})
+router.afterEach((route) => {
+  store.commit(SET_CURRENT_MENU, route.name)
+})
 export default router

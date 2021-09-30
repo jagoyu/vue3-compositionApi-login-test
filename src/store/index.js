@@ -14,7 +14,7 @@ export default createStore({
   actions,
   plugins: [
     createPersistedState({
-      key: 'jago-test-token',
+      key: 'jago-test',
       paths: ['token', 'userInfo', 'menuList', 'currentMenu'],
       storage: {
         getItem: (key) => ls.get(key),
