@@ -14,13 +14,10 @@ import { Bicycle } from '@element-plus/icons'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
-import { CLEAR_TOKEN, SET_USER_ASYNC } from '../../utils/constant'
+import { CLEAR_TOKEN } from '../../utils/constant'
 const router = useRouter()
 const store = useStore()
-const token = computed(() => store.state.token)
-store.dispatch(SET_USER_ASYNC, token.value)
 const userName = computed(() => store.state.userInfo.userName)
-
 function logout() {
   store.commit(CLEAR_TOKEN)
   router.push('/login')
