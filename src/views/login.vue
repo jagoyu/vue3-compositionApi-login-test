@@ -11,16 +11,16 @@
         <el-input v-model="form.password" type="text" />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" style="width: 100%" @click="onSubmit"
-          >登录</el-button
-        >
+        <el-button type="primary" style="width: 100%" @click="onSubmit">{{
+          isLogin ? '登录中。。。' : '登录'
+        }}</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { loginApi } from '@/api'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
@@ -31,19 +31,23 @@ const form = reactive({
   userName: '',
   password: ''
 })
+let isLogin = ref(false)
 const router = useRouter()
 const store = useStore()
 
 async function onSubmit() {
   const { userName, password } = form
+  isLogin.value = true
   const { message, code, token } = await loginApi.login({
     userName,
     password
   })
   if (code === 0) {
-    store.dispatch(LOG_IN, token)
+    await store.dispatch(LOG_IN, token)
+    isLogin.value = false
   } else {
     ElMessage.error(message)
+    isLogin.value = false
   }
 }
 </script>

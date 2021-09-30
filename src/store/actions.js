@@ -9,6 +9,7 @@ import {
 } from '../utils/constant'
 import router from '../router'
 import { loginApi } from '../api'
+import { ElMessage } from 'element-plus'
 
 export default {
   async [LOG_IN]({ commit, dispatch }, token) {
@@ -24,7 +25,7 @@ export default {
       commit(SET_MENU_LIST, menuList)
       commit(SET_CURRENT_MENU, currentMenu)
     } else {
-      console.log(message)
+      ElMessage.error(message)
     }
   },
   async [SET_USER_ASYNC]({ commit }, token) {
@@ -32,7 +33,7 @@ export default {
     if (code === 0) {
       commit(SET_USER, data)
     } else {
-      console.log(message)
+      ElMessage.error(message)
     }
   }
 }

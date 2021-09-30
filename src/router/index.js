@@ -57,7 +57,6 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     if (token) {
-      console.log(store.state.currentMenu)
       next('/workbench')
     } else {
       next()
